@@ -9,15 +9,25 @@ let onHomePage = true;
 let movieForm = document.querySelector("form");
 let movieGallery = document.querySelector("#movies-grid");
 let loadMoreMoviesBtn = document.querySelector("#load-more-movies-btn");
-let img = document.querySelector("img");
+let closeSearchGoHome = document.querySelector("#close-search-btn");
 
 
 // ****CREATE EVENT LISTENER FOR SUBMIT*********
 movieForm.addEventListener("submit", getFromQueryAndDisplay);
 loadMoreMoviesBtn.addEventListener("click", (event) => {getFromQueryAndDisplay(event, true)});
+closeSearchGoHome.addEventListener("click", goBackHome);
 
 
 // *****TIE EVERYTHING TOGETHER*************
+async function goBackHome(event)
+{
+    event.preventDefault();
+    currentQueryTerm = "";
+    currentPage = 1;
+    onHomePage = true;
+    retrieveMovieInformation("", true).then(jsonData => formatIntoHTML(jsonData));
+}
+
 async function getFromQueryAndDisplay(event, justLoadMore=false)
 {
     if (!justLoadMore)
