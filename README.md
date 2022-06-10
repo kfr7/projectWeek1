@@ -40,7 +40,7 @@ Deployed Application (optional): [Flixster Deployed Site](https://github.com/kfr
 
 ### Walkthrough Video
 
-(https://imgur.com/gallery/pGA7vqF)
+![](https://media4.giphy.com/media/6ul8fXkM2vLNSgWPHV/giphy.gif?cid=790b761122db1c828bf8bfb52b95573bf2c82aa821b63d74&rid=giphy.gif&ct=g)
 
 ### Reflection
 
