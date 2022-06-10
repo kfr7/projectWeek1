@@ -40,28 +40,29 @@ Deployed Application (optional): [Flixster Deployed Site](https://github.com/kfr
 
 ### Walkthrough Video
 
-`TODO://` Add the embedded URL code to your animated app walkthrough below, `ADD_EMBEDDED_CODE_HERE`. Make sure the video or gif actually renders and animates when viewing this README. (🚫 Remove this paragraph after adding walkthrough video)
-
-`ADD_EMBEDDED_CODE_HERE`
+`<blockquote class="imgur-embed-pub" lang="en" data-id="a/MSy3LX0"  ><a href="//imgur.com/a/MSy3LX0">Movie Project</a></blockquote><script async src="//s.imgur.com/min/embed.js" charset="utf-8"></script>`
 
 ### Reflection
 
 * Did the topics discussed in your labs prepare you to complete the assignment? Be specific, which features in your weekly assignment did you feel unprepared to complete?
 
-Add your response here
+Yes, learning CSS in detail such as flex boxes was crucial to getting the web site to look as clean as it is. Also, working with javascript and event listeners allowed me to be able to animate
+certain things that allowed the web site to seem more dynamic. I felt pretty prepared other than properly getting modals to show up but I ended up learning that on my own.
 
 * If you had more time, what would you have done differently? Would you have added additional features? Changed the way your project responded to a particular event, etc.
   
-Add your response here
+I would have added the embedded youtube video if I had more time. Also, I would have liked to clean up some issues such as the search box 
+not clearing even after the user clicks the home button. Also, when there are no more movies/pages, I would make the "No more movies" display
+in a better fashion.
 
 * Reflect on your project demo, what went well? Were there things that maybe didn't go as planned? Did you notice something that your peer did that you would like to try next time?
 
-Add your response here
+I noticed that they embedded the youtube videos so that is something that I definitely need to learn and be able to implement.
 
 ### Open-source libraries used
 
-- Add any links to open-source libraries used in your project.
+- None
 
 ### Shout out
 
-Give a shout out to somebody from your cohort that especially helped you during your project. This can be a fellow peer, instructor, TA, mentor, etc.
+Shout out to Doug, Mariam, Doris, and Rebecca for all the help with skills I was not very good at.
