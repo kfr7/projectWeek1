@@ -1,4 +1,4 @@
-// is git pull working
+// Should be done p1
 
 // ********GLOBAL CONSTANTS*************
 const API_KEY = `7564e5f1de84def435a762bc31c0221b`;
@@ -21,6 +21,7 @@ loadMoreMoviesBtn.addEventListener("click", (event) => {getFromQueryAndDisplay(e
 closeSearchGoHome.addEventListener("click", goBackHome);
 
 
+
 // *****TIE EVERYTHING TOGETHER*************
 async function goBackHome(event)
 {
@@ -37,7 +38,6 @@ async function getFromQueryAndDisplay(event, justLoadMore=false)
 {
     if (!justLoadMore)
     {   // Enter if NOT LOADING MORE (new query search)
-        console.log("Entered here if finding new search from submit query")
         // console.log("Not just loading more")
         currentPage = 1;
         currentQueryTerm = event.target.searchInput.value.toLowerCase();
@@ -52,10 +52,7 @@ async function getFromQueryAndDisplay(event, justLoadMore=false)
     retrieveMovieInformation(currentQueryTerm).then(jsonData => formatIntoHTML(jsonData, justLoadMore));
 }
 
-async function getMoreMovies(event)
-{
 
-}
 
 // ************GET INFORMATION*****************
 async function retrieveMovieInformation(queryTerm)  
@@ -119,22 +116,117 @@ function formatIntoHTML(jsonData, justLoadMore=false)
     // console.log("About to call forEach on the array of movies");
     arrayOfMovies.forEach(singleMovieInfo =>
         {
-            
             movieGallery.innerHTML +=  `<div class="movie-card">
-                                            <!-- <div class="border"></div> -->
                                             <h5 class="movie-title">${singleMovieInfo["title"]}</h5>
-                                            <img class="movie-poster" src="https://image.tmdb.org/t/p/w200${singleMovieInfo["poster_path"]}" alt="Image not found" onerror="this.onerror=null;this.src='https://motivatevalmorgan.com/wp-content/uploads/2016/06/default-movie-768x1129.jpg';" />
+                                            <img name="${singleMovieInfo["id"]}" class="movie-poster" src="https://image.tmdb.org/t/p/w200${singleMovieInfo["poster_path"]}" alt="Image not found" onerror="this.onerror=null;this.src='https://motivatevalmorgan.com/wp-content/uploads/2016/06/default-movie-768x1129.jpg';" />
                                             <div class="star-with-rating">
                                                 <img class="star" src="pictures/testing.jpg"/>
                                                 <p class="movie-votes">${singleMovieInfo["vote_average"]} / 10</p>
                                             </div>
                                         </div>`
-            // console.log(singleMovieInfo["poster_path"]);
         })
+    createMovieCardSelectors();
 }
+
+
 
 
 
 window.onload = function() {
     retrieveMovieInformation("", true).then(jsonData => formatIntoHTML(jsonData));
 }
+
+function createMovieCardSelectors()
+{
+    let movieCards = document.querySelectorAll(".movie-card");
+    
+    movieCards.forEach(oneMovieCard => 
+        {
+            oneMovieCard.addEventListener("click", getSpecificMovieData);
+        })
+    // movieCard.addEventListener("click", getSpecificMovieData);
+}
+
+function getSpecificMovieData(event)
+{
+    event.preventDefault();
+    if (event.target.name)
+    {
+        retrieveSpecificMovieData(event.target.name).then(jsonData => popupHTML(jsonData));
+    }
+}
+
+async function retrieveSpecificMovieData(movieId)
+{
+    // https://api.themoviedb.org/3/movie/{movie_id}?api_key=<<api_key>>
+    apiUrl = `https://api.themoviedb.org/3/movie/${movieId}?api_key=${API_KEY}`;
+    console.log(apiUrl);
+    let response = await fetch(apiUrl);
+    let jsonData = await response.json();
+    return jsonData;
+}
+
+function popupHTML(jsonData)
+{
+    modalContent.innerHTML += `<h4>${jsonData["original_title"]}</h4>`
+    modalContent.innerHTML += `<h6>`
+    let i = 0;
+    let lengthOfGenres = jsonData["genres"].length;
+    if (lengthOfGenres === 0)
+    {
+        pass;
+    }
+    else if (lengthOfGenres === 1)
+    {
+        modalContent.innerHTML += `Genre: ${jsonData["genres"][0]["name"]}`
+    }
+    else
+    {
+        modalContent.innerHTML += `Genres: `
+        jsonData["genres"].forEach((genreInfo) =>
+        {
+
+            if (i === (lengthOfGenres - 1))
+            {
+                modalContent.innerHTML += `${genreInfo["name"]}`
+            }
+            else
+            {
+                modalContent.innerHTML += `${genreInfo["name"]}, `
+            }
+            i += 1;
+        })
+    }
+    
+    modalContent.innerHTML += `
+    <div popupMainBody>
+        <img id="popupPoster" src="https://image.tmdb.org/t/p/w200${jsonData["poster_path"]}" alt="Image not found" onerror="this.onerror=null;this.src='https://motivatevalmorgan.com/wp-content/uploads/2016/06/default-movie-768x1129.jpg';" />
+        <p id="popupDescription">Description: ${jsonData["overview"]}</p>
+    </div>`
+
+    modal.style.display = "block";
+}
+
+
+// Get the modal
+var modal = document.getElementById("myModal");
+var modalContent = document.querySelector(".modal-content");
+// Get the <span> element that closes the modal
+// var span = document.getElementsByClassName("close")[0];
+
+
+
+
+// When the user clicks anywhere outside of the modal, close it
+window.onclick = function(event) {
+  if (event.target == modal) {
+    modal.style.display = "none";
+    modalContent.innerHTML = "";
+  }
+}
+
+// // When the user clicks on <span> (x), close the modal
+// span.onclick = function() {
+//     console.log("entered on click");
+//     modal.style.display = "none";
+// }
