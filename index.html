@@ -14,20 +14,21 @@
             <h1 id="Flixster">Flixster</h1>
         </div>
     </div>
-    <h1 id="webPageTitle">Flixster</h1>
-
-    <button id="close-search-btn">Home</button>
+    <div id="flex-close-search-btn">
+        <button id="close-search-btn"><img id="home_gold" src="pictures/goldhouse4.jpg"/></button>
+    </div>
 
     <form> <!-- add the page here with action="something" -->
         <div id="searchBoxAndSubmitButton">
-            <input type="text" id="search-input" name="searchInput" placeholder="Type Movie Here" required/>
-            <button id="submitButton">Search</button> 
+            <input type="text" id="search-input" name="searchInput" required/>
+            <button id="submitButton"><img id="gold-glass" src="pictures/glass_7.jpg"/></button> 
             <!-- make this nicer later -->
         </div>
     </form>
 
 
-        
+    <div id="showingCategoryArea"><h3 id="specificCategoryTag">Now trending...</h3></div>
+
     <div id="movies-grid"></div>
 <!--    <div class="movie-card">
             <p>title</p>
@@ -39,8 +40,10 @@
     <!-- placeholder images is pretty good with try catch  -->
     <!-- Inside of inner html, inside html -->
     
-    
-    <button id="load-more-movies-btn">Load More</button>
+    <div id="loadAndFailMessage">
+        <button id="load-more-movies-btn">Load More</button>
+        <h3 id="noMoreMoviesTag"></h3>
+    </div>
     
     
     

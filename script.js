@@ -11,6 +11,8 @@ let movieForm = document.querySelector("form");
 let movieGallery = document.querySelector("#movies-grid");
 let loadMoreMoviesBtn = document.querySelector("#load-more-movies-btn");
 let closeSearchGoHome = document.querySelector("#close-search-btn");
+let categorySpecific = document.querySelector("#specificCategoryTag");
+let noMoreMoviesTag = document.querySelector("#noMoreMoviesTag");
 
 
 // ****CREATE EVENT LISTENER FOR SUBMIT*********
@@ -24,6 +26,8 @@ async function goBackHome(event)
 {
     event.preventDefault();
     currentQueryTerm = "";
+    categorySpecific.innerHTML = "Now trending..."
+    noMoreMoviesTag.innerHTML = "";
     currentPage = 1;
     onHomePage = true;
     retrieveMovieInformation("", true).then(jsonData => formatIntoHTML(jsonData));
@@ -32,11 +36,13 @@ async function goBackHome(event)
 async function getFromQueryAndDisplay(event, justLoadMore=false)
 {
     if (!justLoadMore)
-    {
+    {   // Enter if NOT LOADING MORE (new query search)
         console.log("Entered here if finding new search from submit query")
         // console.log("Not just loading more")
         currentPage = 1;
         currentQueryTerm = event.target.searchInput.value.toLowerCase();
+        categorySpecific.innerHTML = `Searching for "${event.target.searchInput.value}"...`
+        noMoreMoviesTag.innerHTML = "";
         onHomePage = false;
     }
 
@@ -52,8 +58,7 @@ async function getMoreMovies(event)
 }
 
 // ************GET INFORMATION*****************
-async function retrieveMovieInformation(queryTerm)  // pass through queryTerm because it might not be the "currentQueryTerm"
-                                                                                        // fix and check parameters later
+async function retrieveMovieInformation(queryTerm)  
 {
     let apiUrl = "";
     if (onHomePage)
@@ -105,7 +110,7 @@ function formatIntoHTML(jsonData, justLoadMore=false)
     {
         if (arrayOfMovies.length === 0)
         {
-            movieGallery.innerHTML += "<p>No more movies found.</p>";
+            noMoreMoviesTag.innerHTML = "No more movies found";
         }
     }
 
@@ -116,9 +121,13 @@ function formatIntoHTML(jsonData, justLoadMore=false)
         {
             
             movieGallery.innerHTML +=  `<div class="movie-card">
-                                            <p class="movie-title">${singleMovieInfo["title"]}</p>
-                                            <p class="movie-votes">${singleMovieInfo["vote_average"]}</p>
-                                            <img class="movie-poster" width=200px src="https://image.tmdb.org/t/p/w200${singleMovieInfo["poster_path"]}" alt="Image not found" onerror="this.onerror=null;this.src='https://motivatevalmorgan.com/wp-content/uploads/2016/06/default-movie-768x1129.jpg';" />
+                                            <!-- <div class="border"></div> -->
+                                            <h5 class="movie-title">${singleMovieInfo["title"]}</h5>
+                                            <img class="movie-poster" src="https://image.tmdb.org/t/p/w200${singleMovieInfo["poster_path"]}" alt="Image not found" onerror="this.onerror=null;this.src='https://motivatevalmorgan.com/wp-content/uploads/2016/06/default-movie-768x1129.jpg';" />
+                                            <div class="star-with-rating">
+                                                <img class="star" src="pictures/testing.jpg"/>
+                                                <p class="movie-votes">${singleMovieInfo["vote_average"]} / 10</p>
+                                            </div>
                                         </div>`
             // console.log(singleMovieInfo["poster_path"]);
         })
