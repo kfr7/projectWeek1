@@ -40,7 +40,7 @@ Deployed Application (optional): [Flixster Deployed Site](https://github.com/kfr
 
 ### Walkthrough Video
 
-`<blockquote class="imgur-embed-pub" lang="en" data-id="a/MSy3LX0"  ><a href="//imgur.com/a/MSy3LX0">Movie Project</a></blockquote><script async src="//s.imgur.com/min/embed.js" charset="utf-8"></script>`
+`https://imgur.com/gallery/pGA7vqF`
 
 ### Reflection
 
